@@ -1,15 +1,16 @@
 # CLAUDE.md – Tiny Object Detection
 
-Shared context for everyone on the team, and for Claude, when working in this
-repo. Keep it up to date when decisions change.
+Shared context for everyone working in this repo, and for Claude. Keep it up
+to date when decisions change.
 
 ## What the project is
 
-A team project for a Computer Vision course on **tiny / small object
-detection**. The direction comes from our mentor (the course professor).
+A research project on **tiny / small object detection**: how well existing
+object detectors handle objects only a few pixels across, and how to improve
+them.
 
 The research so far has focused on point-based detectors (CornerNet,
-CenterNet), which the mentor suggested as a starting point. The project is
+CenterNet) as a starting point. The project is
 **not limited to them**: any type of detector can be researched, benchmarked or
 improved, including two-stage, one-stage, anchor-free and transformer-based ones.
 
@@ -35,7 +36,7 @@ The final result is one of two outcomes, still to be decided:
 - **B. Survey plus a new method.** Do A, then propose an improvement to an
   existing detector or a new architecture.
 
-## Guiding principle from the mentor
+## Guiding principle
 
 For every design choice in a paper, ask **why it was done that way** and
 **whether it still makes sense for tiny objects**. The loss function, meaning
@@ -52,8 +53,7 @@ Reading checklist for each core paper:
 
 ## Research directions under consideration
 
-These are the directions the mentor hinted at. They are framed around
-CenterNet, but most apply to other detectors too:
+These are framed around CenterNet, but most apply to other detectors too:
 
 1. **Loss and label assignment.** CenterNet has a single positive pixel per
    object, so the negative term dominates. Can the target be relaxed for tiny
@@ -71,7 +71,7 @@ CenterNet, but most apply to other detectors too:
 
 ## Key papers
 
-**Core** (assigned by the mentor):
+**Core:**
 - Focal Loss (Lin et al., 2017)
 - CornerNet (Law & Deng, 2018)
 - Objects as Points / CenterNet (Zhou et al., 2019)
@@ -80,9 +80,9 @@ CenterNet, but most apply to other detectors too:
 - R-CNN, Fast R-CNN, Faster R-CNN
 - YOLO
 - RFLA (Xu et al., 2022)
-- A CenterNet-based satellite-video vehicle detection paper the mentor reviewed.
-  Its loss is changed so the predicted point only has to fall inside the box.
-  We still need the title from him.
+- A CenterNet-based satellite-video vehicle detection paper (title still to be
+  confirmed). Its loss is changed so the predicted point only has to fall
+  inside the box.
 
 **Skim:** HOG, SSD, FPN, Mask R-CNN, and DETR later on.
 
@@ -110,32 +110,48 @@ fact.
 
 Candidates so far:
 
-- **Mentioned by the mentor:**
-  - COCO, the general reference; CenterNet reports its results on it
-  - VisDrone, his suggestion for small-object work
-  - A satellite-video dataset he has a copy of
-- **From the literature review:**
-  - AI-TOD / AI-TOD-v2, the closest thing to a standard tiny-object benchmark
-  - SODA-D and SODA-A
-  - TinyPerson
-  - SOD4SB
-  - Others; see `docs/datasets/`
+- COCO, the general reference; CenterNet reports its results on it
+- VisDrone, drone imagery with many small objects
+- A satellite-video dataset (details still to be confirmed)
+- AI-TOD / AI-TOD-v2, the closest thing to a standard tiny-object benchmark
+- SODA-D and SODA-A
+- TinyPerson
+- SOD4SB
+- Others; see `docs/datasets/`
 
 Definitions of "tiny" differ between papers: COCO "small" is under 32×32 px, and
 AI-TOD "tiny" is under 16×16 px. Always state which definition a number uses.
 
 ## How we work
 
-- **Tasks** are GitHub issues in `Ikkjo/tiny-object-detection`. Work within an
+- **Tasks** are GitHub issues in this repository. Work within an
   issue may be split between people; the split can change from issue to issue.
 - **Research notes** go in `docs/`:
   - research notes, one file per topic, named after what they cover rather than
     after a person or track, e.g.
     `docs/datasets/reference-benchmark.md`
   - final decisions in `docs/datasets/selection.md` and `docs/model-selection.md`
+- **Scripts** (data analysis, evaluation helpers) go in `scripts/`, each with a
+  docstring saying what it does and how to run it. Any number in the notes that
+  we computed ourselves should come from a script in the repo, so it can be
+  reproduced.
 - **Framework:** PyTorch where possible, so results are comparable. CenterNet
   code is the official implementation or MMDetection.
 - **Hardware:** modest. Target GPU and VRAM: **TODO**.
+
+### Git workflow
+
+- `main` holds reviewed work only. Nobody commits to it directly.
+- One branch per piece of work, named `<type>/<short-topic>`, e.g.
+  `docs/reference-benchmark-dataset` or `feat/centernet-baseline`. Types:
+  `docs`, `feat`, `fix`, `exp` (experiments).
+- Open a pull request into `main`. Another contributor reviews it before it is merged.
+- Reference the issue in commit messages and PR descriptions with `refs #N`
+  (or `closes #N` when the PR finishes the issue).
+- **Never commit datasets, annotation files, model weights or experiment
+  outputs.** Keep them in `data/`, `checkpoints/` and `outputs/`, which are
+  ignored by git (see `.gitignore`). Write down in the notes where each file
+  came from instead.
 
 ## Instructions for Claude
 
@@ -144,17 +160,19 @@ AI-TOD "tiny" is under 16×16 px. Always state which definition a number uses.
   and mark derived numbers *(est.)*. Never fill a gap with a guess.
 - Read the actual paper or repository rather than relying on search snippets
   wherever possible.
-- When discussing a method, follow the mentor's principle: explain why each
+- When discussing a method, follow the guiding principle: explain why each
   design choice exists and whether it holds for tiny objects.
 - Show changes for review before committing. Never commit, push, or comment on
   GitHub issues without the author's explicit go-ahead.
-- Keep this file current when the team makes a decision. Record the decision
+- Keep this file current when a decision is made. Record the decision
   and the reason for it.
+- Ask before downloading anything. Downloads go in `data/` or outside the repo,
+  never into tracked folders.
+- Follow the git workflow above: work on a branch, never on `main`.
 
 ## Open questions
 
 - Outcome A or B (see above)
 - Target GPU and VRAM
-- Exact date of the next meeting with the mentor
 - Real-time speed or offline accuracy?
 - Title of the satellite-video CenterNet paper

@@ -54,7 +54,7 @@ five selection criteria in issue #1, plus C3.
 | C3 | **Clean, exhaustive evaluation** | If unlabelled objects are excluded from scoring, small-object errors are hard to interpret | High |
 | C4 | **Fits modest hardware** (download size, image count) | We have limited GPU and disk | Medium |
 | C5 | **Tooling and format** (COCO JSON, MMDetection support, evaluation code) | Less conversion work, comparable numbers | Medium |
-| C6 | **Licence and access** allow academic use without hurdles | Must be usable for a course project | Medium |
+| C6 | **Licence and access** allow academic use without hurdles | Must be usable for research without extra agreements | Medium |
 
 ## 2. Contenders
 
@@ -248,7 +248,7 @@ custom area ranges [S2]. At 12.6% of 36,335 val instances, that is about 4,600
 tiny objects, enough for a stable score.
 
 What would change the decision:
-- the mentor asks for a specific benchmark
+- a specific benchmark is required for comparison with related work
 - a general-purpose tiny-object benchmark with published results turns up
 
 ## 5. Ruled out early
@@ -261,7 +261,7 @@ benchmark, but were not shortlisted.
 | SOD4SB (MVA2023) | Birds | [S20] | Single class; few published results and no CenterNet results; public-test labels hidden; ~62 GB for the full training set |
 | NUAA-SIRST, NUDT-SIRST, IRSTD-1k | Infrared | [S21] | Segmentation masks and Pd/Fa metrics instead of boxes and AP; one class |
 | DeepPCB, PKU-Market-PCB | Industrial defects | [S22] | Niche; little published work to compare against |
-| DeepLesion, LUNA16 | Medical | [S23] | 3D data, FROC metrics, restricted access; out of scope for a course project |
+| DeepLesion, LUNA16 | Medical | [S23] | 3D data, FROC metrics, restricted access; out of scope for this project |
 | AI-TOD, SODA-A / SODA-D, TinyPerson | Aerial / ground-level | [S24] | Real tiny-object benchmarks, but domain-specific; they belong to the aerial and ground-level choices |
 
 ### Domains not covered by the aerial and ground-level datasets
@@ -288,7 +288,7 @@ benchmark, but were not shortlisted.
 
 - [ ] Measure LVIS v1 val object sizes (192 MB annotation file; same script).
 - [ ] Get the list of 12 "popular" datasets from Tong & Wu (full text).
-- [ ] Ask the mentor whether he expects a specific reference benchmark.
+- [ ] Confirm that no specific reference benchmark is required.
 
 ## 7. Sources
 

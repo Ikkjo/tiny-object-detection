@@ -1,0 +1,97 @@
+# Paper log
+
+This file lists every paper we looked at, one row per paper, with the datasets
+it uses (issue #1) and the models it proposes or compares (issue #2). The
+dataset notes, the model shortlist and the reading list all use it. New
+papers go here with the same columns.
+
+**How to read the columns**
+
+- **Datasets:** aerial and remote-sensing datasets with experiments in the
+  paper. Others are in brackets.
+- **Method (built on):** what the paper proposes and which detector it
+  modifies.
+- **Models compared:** the baselines in its main results tables, as far as
+  checked.
+- **Checked:** `abstract` = only the abstract was read; `tables` = the
+  dataset and results sections were read; `full` = read end to end. All of
+  these so far were read through a web tool that extracts page content, not
+  in full by a person.
+- **Where to look:** for every **TBD**, the place in the paper that answers
+  it. These are the items to check by hand.
+- **Team verdict:** left empty for you after reading the abstract
+  (keep / maybe / drop, and why).
+
+Families: 2S = two-stage, 1S = one-stage anchor-based, AF = anchor-free
+dense, PT = point/keypoint-based (CornerNet, CenterNet), DETR = query-based
+transformer, FM = foundation model, OBB = oriented boxes.
+
+## 1. Papers
+
+| ID | Paper | Year, venue | Datasets | Method (built on) | Models compared | Code | Checked | Where to look (TBD) | Team verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| L01 | [Objects as Points (CenterNet)](https://arxiv.org/abs/1904.07850) | 2019, arXiv | (COCO) | CenterNet, PT; DLA-34, ResNet, Hourglass-104 | **TBD** | [xingyizhou/CenterNet](https://github.com/xingyizhou/CenterNet) | code only | Speed/accuracy table in section 6 | |
+| L02 | [Tiny Object Detection in Aerial Images (AI-TOD, M-CenterNet)](https://cs.paperswithcode.com/paper/tiny-object-detection-in-aerial-images) | 2020, ICPR | AI-TOD | M-CenterNet, PT, multiple centre points (DLA-34) | **TBD** | [jwwangchn/AI-TOD](https://github.com/jwwangchn/AI-TOD) (data) | abstract | IEEE Xplore (paywalled): benchmark table and M-CenterNet section. M-CenterNet on AI-TOD 14.5 AP is quoted in [SimD](https://arxiv.org/abs/2407.02394) Table II | |
+| L03 | [Dot Distance (DotD)](https://openaccess.thecvf.com/content/CVPR2021W/EarthVision/html/Xu_Dot_Distance_for_Tiny_Object_Detection_in_Aerial_Images_CVPRW_2021_paper.html) | 2021, CVPRW | AI-TOD | DotD metric for assignment and NMS; in anchor-based detectors (which: **TBD**) | **TBD** | **TBD** | abstract | Experiments section and main table of the CVF PDF | |
+| L04 | [NWD-RKA, AI-TOD-v2](https://arxiv.org/abs/2206.13996) | 2022, ISPRS J. | AI-TOD, AI-TOD-v2, VisDrone2019, DOTA-v2.0 | NWD metric + RKA assignment; plugged into Faster R-CNN, Cascade R-CNN, DetectoRS (others **TBD**) | AI-TOD-v2 benchmark: TridentNet, Faster R-CNN (R-50, R-101, HRNet-w32), Cascade R-CNN, DetectoRS, DotD, YOLOv3, RetinaNet, SSD-512, RepPoints, FoveaBox, FCOS, Grid R-CNN | [Chasel-Tsui/mmdet-aitod](https://github.com/Chasel-Tsui/mmdet-aitod) | tables | Confirm the full list of detectors NWD-RKA is added to (results tables per dataset) | |
+| L05 | [RFLA](https://arxiv.org/abs/2208.08738) | 2022, ECCV | AI-TOD, VisDrone2019, DOTA-v2.0 (+ TinyPerson) | Gaussian receptive-field label assignment; on Faster R-CNN and FCOS (+ Cascade R-CNN? **TBD**) | AI-TOD table: TridentNet, Faster R-CNN, Cascade RPN, Cascade R-CNN, DetectoRS, DotD, DetectoRS+NWD, SSD-512, RetinaNet, PAA, ATSS, RepPoints, OTA, AutoAssign, FCOS, M-CenterNet | [Chasel-Tsui/mmdet-rfla](https://github.com/Chasel-Tsui/mmdet-rfla) | tables (AI-TOD only) | Results tables for VisDrone, DOTA-v2.0, TinyPerson; which detectors carry RFLA | |
+| L06 | [SAHI](https://arxiv.org/abs/2202.06934) | 2022, ICIP | VisDrone2019, xView | Sliced inference and fine-tuning, detector-agnostic | FCOS, VFNet, TOOD | [obss/sahi](https://github.com/obss/sahi) | abstract | Backbones and input sizes (experiments section) | |
+| L07 | [SODA survey and benchmarks](https://arxiv.org/abs/2207.14096) | 2023, TPAMI | SODA-A (+ SODA-D) | Survey + two datasets | SODA-A: Rotated Faster R-CNN, Rotated RetinaNet, RoI Transformer, Gliding Vertex, Oriented R-CNN, S²A-Net, DODet, Oriented RepPoints, DHRec. SODA-D: includes CenterNet and CornerNet | [shaunyuan22.github.io/SODA](https://shaunyuan22.github.io/SODA/) | tables | Full SODA-D model list (Table 6) | |
+| L08 | [CFINet](https://arxiv.org/abs/2308.09534) | 2023, ICCV | SODA-A (+ SODA-D) | Coarse-to-fine RPN + feature imitation; on Faster R-CNN, 2S | **TBD** | [shaunyuan22/CFINet](https://github.com/shaunyuan22/CFINet) | abstract | Main results tables (SODA-D, SODA-A) | |
+| L09 | [DCFL](https://arxiv.org/abs/2304.08876) | 2023, CVPR | DOTA-v1.0/v1.5/v2.0, DIOR-R, VisDrone2019 (+ COCO) | Dynamic prior + coarse-to-fine assigner, OBB, 1S | DOTA-v1.5 table: RetinaNet-O, FR-OBB, RoI Transformer, AOPG, GGHL, Oriented RepPoints | [Chasel-Tsui/mmrotate-dcfl](https://github.com/Chasel-Tsui/mmrotate-dcfl) | abstract + slides | Base detector, VisDrone table | |
+| L10 | [CEASC](https://arxiv.org/abs/2303.14488) | 2023, CVPR | VisDrone2019, UAVDT | Adaptive sparse-convolution head; plugged into RetinaNet and GFL V1 | MobileNetV2, ShuffleNetV2, QueryDet (supplement) | [Cuogeihong/CEASC](https://github.com/Cuogeihong/CEASC) | abstract | Main tables: accuracy, GFLOPs, FPS | |
+| L11 | [YOLC](https://arxiv.org/abs/2404.06180) | 2024, T-ITS | VisDrone2019, UAVDT | Cluster zoom-in + GWD loss + deformable head, on CenterNet (PT) | **TBD** | [dawn-ech/YOLC](https://github.com/dawn-ech/YOLC) | abstract | Main table (CenterNet baseline AP, backbone) | |
+| L12 | [DQ-DETR](https://arxiv.org/abs/2404.03507) | 2024, ECCV | AI-TOD-v2 (others **TBD**) | Dynamic query count and position from a counting module, DETR | "CNN-based and DETR-like" baselines, **TBD** | [Katie0723/DQ-DETR](https://github.com/Katie0723/DQ-DETR) | abstract | Table 2 (AI-TOD-v2) | |
+| L13 | [SR-TOD](https://arxiv.org/abs/2405.11276) | 2024, ECCV | AI-TOD, VisDrone2019, DroneSwarms (new), DOTA (supplement) | Self-reconstruction difference map; on DetectoRS, Cascade R-CNN (others **TBD**) | Includes RFLA | [Hiyuur/SR-TOD](https://github.com/Hiyuur/SR-TOD) | supplement | Main tables; DroneSwarms availability | |
+| L14 | [Point Teacher](https://arxiv.org/abs/2412.05837) | 2024, arXiv | AI-TOD-v2, SODA-A (+ TinyPerson) | Point-supervised teacher-student + MIL | P2BNet, PLUG | not released at time of reading | abstract + Table 1 snippet | Base detector; numbers in Table 1 | |
+| L15 | [AI-TOD-R](https://arxiv.org/abs/2412.11582) | 2024, arXiv | AI-TOD-R (new), SODA-A, DOTA-v1.0/v1.5/v2.0, DIOR-R, VisDrone (+ COCO) | DCFL (journal version), OBB | Benchmark of fully-supervised and label-efficient detectors, **TBD** | [Chasel-Tsui/AI-TOD-R](https://github.com/Chasel-Tsui/AI-TOD-R) | dataset section | Benchmark table on AI-TOD-R | |
+| L16 | [Robust TOD amidst label noise](https://arxiv.org/abs/2401.08056) | 2024, arXiv | AI-TOD-v2, DOTA-v2.0 | Label-noise robustness for tiny objects (method **TBD**) | **TBD** | **TBD** | snippet | Abstract and Table 1 | |
+| L17 | [XS-VID](https://arxiv.org/abs/2407.18137) | 2024, arXiv | XS-VID (new), VisDrone2019-VID | New video dataset + a video detector (YOLOFT per a secondary summary, **TBD**) | **TBD** | [gjhhust.github.io/XS-VID](https://gjhhust.github.io/XS-VID/) | abstract | Benchmark table | |
+| L18 | [Dome-DETR](https://arxiv.org/abs/2505.05741) | 2025, ACM MM | AI-TOD-v2, VisDrone | Density-oriented feature and query manipulation, DETR | **TBD** | [RicePasteM/Dome-DETR](https://github.com/RicePasteM/Dome-DETR) | abstract | Main tables | |
+| L19 | [RGBT-Tiny](https://arxiv.org/abs/2406.14482) | 2025, TPAMI | RGBT-Tiny (new) | Dataset + SAFit measure and loss | 23+ detectors incl. SSD, YOLO, TOOD, Faster R-CNN, SABL, Cascade R-CNN, Dynamic R-CNN, RetinaNet, **CenterNet**, FCOS, ATSS, VarifocalNet, Deformable-DETR, Sparse R-CNN, RFLA, QueryDet | [XinyiYing/RGBT-Tiny](https://github.com/XinyiYing/RGBT-Tiny) | abstract | Benchmark table (CenterNet row) | |
+| L20 | [ScaleBridge-Det](https://arxiv.org/abs/2512.01665) | 2025, arXiv | AI-TOD-v2, DTOD, VisDrone | 2–3 B parameter detector with mixture-of-experts routing and density-guided queries, FM-scale | RetinaNet, YOLOv8-M, YOLOv11-M, TPH-YOLOv5, DNTR, CFENet, DQ-DETR, D3Q, LAE-DINO, DINOv3-7b-sat | **TBD** | tables (Table II) | DTOD and VisDrone tables | |
+| L21 | [Density-driven guidance for dense tiny objects](https://arxiv.org/abs/2512.22949) | 2025, arXiv | AI-TOD, DTOD | **TBD** | **TBD** | **TBD** | dataset section | Method and results sections | |
+| L22 | [Scale-aware relay and scale-adaptive loss](https://arxiv.org/abs/2511.09891) | 2025, arXiv | AI-TOD, AI-TOD-v2, VisDrone2019 | **TBD** | **TBD** | **TBD** | dataset section | Method and results sections | |
+| L23 | [D³R-DETR](https://arxiv.org/abs/2601.02747) | 2026, arXiv | AI-TOD-v2 | Dual-domain density refinement, DETR | **TBD** | **TBD** | dataset section | Main table | |
+| L24 | [SimD](https://arxiv.org/abs/2407.02394) | 2024, arXiv | AI-TOD (others **TBD**) | Similarity-distance label assignment; on Faster R-CNN, Cascade R-CNN, DetectoRS | Table II includes TridentNet and M-CenterNet | **TBD** | tables (AI-TOD) | Dataset list and other tables | |
+| L25 | [Analysis of detection models for tiny objects in satellite imagery](https://arxiv.org/abs/2412.10453) | 2024, arXiv | 3,000-image mix of AI-TOD-v2 + Airbus Aircraft ("SkyFusion"); SAT-MTB for tracking | Benchmark study (MMDetection, Colab T4) | Faster R-CNN, RetinaNet, FCOS, VarifocalNet, FoveaBox, RTMDet-T/S/M/L, DDOD, DetectoRS | — | tables | — | |
+| L26 | [Empirical study of small-object methods on satellite imagery](https://arxiv.org/abs/2502.03674) | 2025, arXiv | xView (cars), SkySat bee boxes | Benchmark study | YOLOv11, SSD, Faster R-CNN, Cascade R-CNN | — | tables | Later versions of the paper may fill the empty tables | |
+| L27 | [VisDrone challenge paper](https://arxiv.org/abs/2001.06303) | 2021, TPAMI | VisDrone (DET, VID, SOT, MOT) | Dataset + challenge report | CornerNet (Hourglass-104) baseline among others; challenge entries incl. RRNet and MSC-CenterNet (CenterNet-based) | [VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset) | tables | Full baseline list (Table 2) | |
+| L28 | [CenterNet on aerial imagery](https://arxiv.org/abs/1908.08244) | 2019, arXiv | VisDrone2019 | CenterNet with several backbones and resolutions | **TBD** | **TBD** | abstract | Tables 1–4 (backbones, AP) | |
+| L29 | [DOTA-v2.0](https://arxiv.org/abs/2102.12219) | 2021, TPAMI | DOTA-v1.0/v1.5/v2.0 | Dataset + baselines | **TBD** | [captain-whu.github.io/DOTA](https://captain-whu.github.io/DOTA/) | dataset section | Baseline tables | |
+| L30 | [xView](https://arxiv.org/abs/1802.07856) | 2018, arXiv | xView | Dataset | SSD baseline | — | abstract | — | |
+| L31 | [VISO](https://arxiv.org/abs/2111.12960) | 2021, TGRS | VISO (satellite video) | Dataset + motion-modelling baseline (MMB, not learned) | **TBD** | [QingyongHu/VISO](https://github.com/QingyongHu/VISO) | abstract | Detection benchmark table | |
+| L32 | [DSFNet](https://ieeexplore.ieee.org/document/9594855) | 2022, GRSL | VISO subset | Two-stream (2-D + 3-D) moving-object detector, code derived from CenterNet (PT) | **TBD** | [ChaoXiao12/Moving-object-detection-DSFNet](https://github.com/ChaoXiao12/Moving-object-detection-DSFNet) | README | IEEE paper results table | |
+| L33 | [HiEUM](https://arxiv.org/abs/2411.15895) | 2024, arXiv | Satellite video, relabelled dataset (which: **TBD**) | Unsupervised, pseudo-labels, sparse CenterNet-style head | DSFNet | [ChaoXiao12/...HiEUM](https://github.com/ChaoXiao12/Moving-object-detection-in-satellite-videos-HiEUM) | snippet | Dataset section, Table 2 | |
+| L34 | [SAT-MTB](https://doi.org/10.1109/TGRS.2023.3278075) | 2023, TGRS | SAT-MTB | Dataset + baselines | **TBD** | [CAS page](https://csu.cas.cn/gb/kybm/sjlyzx/gcxx_sjj/sjj_wxxl/) | none | IEEE paper (paywalled) or arXiv 2407.04730 | |
+| L35 | [P2BNet](https://arxiv.org/abs/2207.06827) | 2022, ECCV | (COCO, VOC) | Point-supervised, Faster R-CNN based | **TBD** | [ucas-vg/P2BNet](https://github.com/ucas-vg/P2BNet) | abstract | — | |
+| L36 | [PointOBB](https://arxiv.org/abs/2311.14757) | 2024, CVPR | DIOR-R, DOTA-v1.0 | Point-supervised oriented boxes | **TBD** | [Luo-Z13/pointobb](https://github.com/Luo-Z13/pointobb) | abstract | — | |
+| L37 | [Frame difference + CenterNet](https://doi.org/10.3390/s25020306) | 2025, Sensors | Satellite video (which: **TBD**) | CenterNet + frame-difference input + self-reconstruction branch | DSFNet and others, **TBD** | **TBD** | abstract | Datasets and results sections | |
+| L38 | [Deep vehicle detection in satellite video](https://arxiv.org/abs/2204.06828) | 2022, arXiv | Satellite video (which: **TBD**) | Heatmap-output spatio-temporal CNN | **TBD** | **TBD** | abstract | Dataset section | |
+| L39 | [SDM-Car](https://arxiv.org/abs/2412.18214) | 2024, arXiv | SDM-Car (new, satellite video) | Dataset of small, dim moving vehicles + baseline | **TBD** | **TBD** | snippet | Dataset statistics and benchmark | |
+
+## 2. Models seen so far
+
+Grouped by family. "Papers" lists where the model appears as a method or a
+baseline. Used as input for issue #2.
+
+| Model | Family | Papers | Framework / code | Notes |
+|---|---|---|---|---|
+| CenterNet | PT | L01, L07 (SODA-D), L11 (base), L19, L32, L33, L37 | Official repo; MMDetection | Our starting point. Trails anchor-based detectors on SODA-D's smallest objects |
+| M-CenterNet | PT | L02, L05, L24 | **TBD** (code not found) | 14.5 AP on AI-TOD |
+| CornerNet | PT | L07, L27 | Official repo; MMDetection | 23.43 AP on VisDrone test-dev |
+| RepPoints / Oriented RepPoints | AF (point set) | L04, L05, L07, L09 | MMDetection / MMRotate | |
+| Faster R-CNN | 2S | L04, L05, L19, L24, L25, L26 | MMDetection, Detectron2 | Host for NWD-RKA, RFLA, SimD, CFINet |
+| Cascade R-CNN, Cascade RPN | 2S | L04, L05, L13, L19, L24, L26 | MMDetection | |
+| DetectoRS | 2S | L04, L05, L13, L24, L25 | MMDetection | Best host for NWD-RKA (24.7 AP on AI-TOD-v2) |
+| TridentNet, Grid R-CNN, Sparse R-CNN, Dynamic R-CNN, SABL | 2S | L04, L05, L19 | MMDetection | |
+| RetinaNet | 1S | L04, L05, L10, L19, L20, L25 | MMDetection | Host for CEASC |
+| SSD | 1S | L04, L05, L19, L26, L30 | MMDetection | Among the weakest in the L05 (AI-TOD) and L26 (xView) tables |
+| YOLOv3 / YOLOv8 / YOLOv11 / TPH-YOLOv5 | 1S | L04, L19, L20, L26 | Ultralytics | YOLOv11-M 30.5 AP on AI-TOD-v2 (L20 table) |
+| FCOS, ATSS, PAA, OTA, AutoAssign, FoveaBox, VarifocalNet, TOOD, DDOD, GFL | AF / 1S | L04, L05, L06, L10, L19, L25 | MMDetection | |
+| RTMDet | AF | L25 | MMDetection | |
+| Deformable DETR, DQ-DETR, Dome-DETR, D3Q, DNTR, D³R-DETR | DETR | L12, L18, L19, L20, L23 | Own repos (mostly MMDetection or DINO-based) | DQ-DETR 30.2 AP on AI-TOD-v2 |
+| ScaleBridge-Det, LAE-DINO, DINOv3-7b-sat | FM | L20 | **TBD** | Too large for our hardware |
+| Rotated Faster R-CNN, RoI Transformer, Oriented R-CNN, S²A-Net, DCFL, etc. | OBB | L07, L09, L15 | MMRotate | Only relevant if we use oriented boxes |
+| P2BNet, Point Teacher, PointOBB | Point-supervised | L14, L35, L36 | Own repos | Weak-supervision direction |
+| DSFNet, HiEUM | Video, PT-derived | L32, L33 | Own repos | Satellite-video direction |

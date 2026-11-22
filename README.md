@@ -14,6 +14,7 @@ also what Claude uses as its instructions in this repo.
 |---|---|
 | `CLAUDE.md` | Shared project context and working rules |
 | `docs/datasets/` | Dataset research: one file per dataset choice, plus the final decision in `selection.md` |
+| `docs/literature/` | Paper notes and the paper log (datasets and models used by each paper) |
 | `docs/` | Other research notes and decisions (e.g. `model-selection.md`) |
 | `scripts/` | Analysis and helper scripts |
 | `data/`, `checkpoints/`, `outputs/` | Datasets, model weights and experiment outputs. **Not tracked by git** |
@@ -35,4 +36,12 @@ annotation file, in AI-TOD size bins (box size) and COCO size bins (mask area):
 
 ```bash
 python3 scripts/coco_size_stats.py data/coco/annotations/instances_val2017.json
+```
+
+`scripts/aerial_size_stats.py` reports object sizes, density, image resolution
+and CenterNet target statistics for aerial datasets in their native annotation
+formats (COCO JSON, VisDrone, DOTA, xView, SODA-A):
+
+```bash
+python3 scripts/aerial_size_stats.py --format coco --name "AI-TOD-v2 val" data/ai-tod-v2/aitodv2_val.json
 ```

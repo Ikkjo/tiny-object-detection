@@ -5,8 +5,8 @@ This is the final choice of the three datasets we use in the project (issue
 each one we pick a nominee and a runner-up. The research for each choice is in
 its own notes file, linked below.
 
-**Status:** in progress. We have a nominee for the reference benchmark, and the
-aerial and ground-level datasets are still being researched. We fill in the
+**Status:** in progress. We have nominees for the reference benchmark and the
+aerial dataset, and the ground-level dataset is still being researched. We fill in the
 rest of this file once all three are nominated and everyone working on the
 issue agrees.
 
@@ -15,7 +15,7 @@ issue agrees.
 | Kind | Chosen | Runner-up | Research notes |
 |---|---|---|---|
 | Reference benchmark | MS COCO 2017 *(nominated)* | LVIS v1.0 | [reference-benchmark.md](reference-benchmark.md) |
-| Aerial images | *pending* | *pending* | [aerial-dataset.md](aerial-dataset.md) |
+| Aerial images | AI-TOD-v2 *(nominated)* | VisDrone2019-DET | [aerial-dataset.md](aerial-dataset.md) |
 | Ground-level images | *pending* | *pending* | [ground-level-dataset.md](ground-level-dataset.md) |
 
 ## Why each was chosen
@@ -37,9 +37,23 @@ The full comparison is in the notes file.
 - **Limitation:** only 12.6% of COCO objects are under 16 px (measured), so we
   need the aerial and ground-level datasets for tiny objects.
 
-### Aerial images: *pending*
+### Aerial images: AI-TOD-v2
 
-<!-- Nominee, why, runner-up, limitation. Summary of aerial-dataset.md section 4. -->
+- **What we use it for:** to test detectors on tiny objects. It is our main
+  tiny-object dataset.
+- **Why:** of the six aerial datasets we measured, it is the only one where
+  almost all objects are tiny: 85.9% are under 16 px (measured), against
+  26–48% for the others. Recent tiny-object methods report results on it, and
+  its labels were cleaned to add missed objects. Its images are 800×800, so
+  they don't need to be cut into tiles. It is large enough on its own (28,036
+  images, 752,746 objects), so we use one aerial dataset, not two.
+- **Runner-up, VisDrone2019-DET:** the aerial dataset used most often, and
+  the easiest to get and train on. It came second because only 26–36% of its
+  objects are under 16 px.
+- **Limitation:** only the labels are published. The images have to be cut
+  out of the xView training images with the AI-TOD tool, or taken from a full
+  copy on Kaggle. 88% of the objects are vehicles, and there are no published
+  CenterNet results, so we produce the first CenterNet baseline ourselves.
 
 ### Ground-level images: *pending*
 
@@ -62,7 +76,7 @@ any baselines.
 | Dataset | Evaluation split | Training data | Metrics |
 |---|---|---|---|
 | MS COCO 2017 | val 2017 (5K images, public labels) | Pretrained weights; subsets of train 2017 where we train | AP, AP50, AP75, AP_S/M/L, plus AP in AI-TOD size bins |
-| Aerial | *pending* | *pending* | *pending* |
+| AI-TOD-v2 | test (14,018 images, public labels) | trainval (14,018 images), or a subset of it if our hardware needs that | AP, AP50, AP75, plus AP_vt / AP_t / AP_s / AP_m for AI-TOD's size ranges (`cocoapi-aitod`) |
 | Ground-level | *pending* | *pending* | *pending* |
 
 ## Agreement

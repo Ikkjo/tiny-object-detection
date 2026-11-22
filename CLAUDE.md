@@ -130,6 +130,8 @@ AI-TOD "tiny" is under 16×16 px. Always state which definition a number uses.
   - research notes, one file per topic, named after what they cover rather than
     after a person or track, e.g.
     `docs/datasets/reference-benchmark.md`
+  - the paper log, `docs/literature/paper-log.md`: every paper we read, with
+    the datasets and models it uses (input for issues #1 and #2)
   - final decisions in `docs/datasets/selection.md` and `docs/model-selection.md`
 - **Scripts** (data analysis, evaluation helpers) go in `scripts/`, each with a
   docstring saying what it does and how to run it. Any number in the notes that

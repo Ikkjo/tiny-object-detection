@@ -1,56 +1,59 @@
 # Reference benchmark dataset
 
-Research for choosing the project's **reference benchmark**: the dataset we
-use to compare our results with published work. It is one of the three
-datasets we use, next to the [aerial dataset](aerial-dataset.md) and the
-[ground-level dataset](ground-level-dataset.md). Part of issue #1 (Select
-datasets for tiny object detection).
+This is the research for choosing our **reference benchmark**, the dataset we
+use to compare our results with published work. We use three datasets in
+total, and the other two are the [aerial dataset](aerial-dataset.md) and the
+[ground-level dataset](ground-level-dataset.md). This is part of issue #1
+(Select datasets for tiny object detection).
 
-**Nominee: MS COCO 2017** · **Runner-up: LVIS v1.0**. The reasoning is in
-[section 4](#4-decision).
+**Nominee: MS COCO 2017** · **Runner-up: LVIS v1.0**. The reasons for the
+choice are in [section 4](#4-decision).
 
-Conventions: every number has a source in [section 7](#7-sources). Fields
-marked **TBD** have not been checked against a primary source yet, and numbers
-marked *(est.)* are derived by us, not reported. "Measured" means we computed
-it ourselves from the official annotation files with
+Every number has a source, listed in [section 7](#7-sources). **TBD** means
+we haven't checked it against a primary source yet, and *(est.)* means we
+derived the number ourselves. "Measured" means we computed it from the official
+annotation files with
 [`scripts/coco_size_stats.py`](../../scripts/coco_size_stats.py) [S27].
 
 ## Short answer: is there a standard dataset for tiny object detection?
 
-**Not a single one.** The literature uses two references:
+**No, there isn't one single standard.** The papers we read use two kinds of
+reference:
 
-- **COCO** is the general reference. Every detector reports on it, and its
-  AP_S metric (objects under 32×32 px) is the usual way to report small-object
-  performance. It is not a tiny-object dataset, though: only 12.6% of its
-  objects are under 16 px (measured).
+- **COCO** is the general reference. Every detector reports results on it,
+  and its AP_S metric (objects under 32×32 px) is the usual way to report how
+  well a detector does on small objects. But COCO isn't really a tiny-object
+  dataset, since only 12.6% of its objects are under 16 px (measured).
 - **AI-TOD / AI-TOD-v2** (aerial, under 16 px) and **SODA-D / SODA-A**
-  (driving and aerial) are the dedicated tiny-object benchmarks recent papers
-  report on most [S24], [S25]. All of them are domain-specific, so they belong
-  to the aerial and ground-level dataset choices.
+  (driving and aerial) are the tiny-object benchmarks that recent papers use
+  most [S24], [S25]. Each of them is for a specific domain, so we look at them
+  when choosing the aerial and ground-level datasets.
 
-No survey we read names a general-purpose benchmark built for tiny objects.
+None of the surveys we read mention a general-purpose benchmark made for tiny
+objects.
 
 ## 1. What the reference benchmark is for
 
-The aerial and ground-level datasets are where tiny objects actually appear.
-The reference benchmark has a different job:
+We test on tiny objects mostly with the aerial and ground-level datasets. We
+need the reference benchmark for three other reasons:
 
-1. **Anchor our baselines to published numbers.** If our CenterNet run on the
-   reference benchmark matches the paper's reported score, our pipeline is
-   correct, and our results on the other two datasets can be trusted.
-2. **Show the general small-object gap.** Every detector does worse on small
-   objects. A benchmark that reports this separately lets us measure it the same
-   way the literature does.
-3. **Provide pretrained weights.** We fine-tune rather than train from
-   scratch, so the weights we start from should match this dataset.
+1. **To compare our baselines with published results.** If we run CenterNet on
+   the reference benchmark and get the same score as the paper, we know our
+   setup works. Then we can also trust our results on the other two datasets.
+2. **To measure how much worse detectors do on small objects.** Every detector
+   scores lower on small objects. If the benchmark reports a separate score for
+   them, we can measure this the same way other papers do.
+3. **For pretrained weights.** We plan to fine-tune existing models rather than
+   train from scratch, so the weights we start from should come from this
+   dataset.
 
-These roles give the criteria used to compare the contenders. They cover all
-five selection criteria in issue #1, plus C3.
+From these three reasons we made the criteria below for comparing the datasets.
+They include all five selection criteria from issue #1, plus C3.
 
 | # | Criterion | Why it matters for us | Weight |
 |---|---|---|---|
-| C1 | **Published results**, including CenterNet's | Role 1: without published numbers there is nothing to anchor to | High |
-| C2 | **Small objects and a small-object metric** | Role 2: we need a separate score for small objects | High |
+| C1 | **Published results**, including CenterNet's | Reason 1: without published results we have nothing to compare with | High |
+| C2 | **Small objects and a small-object metric** | Reason 2: we need a separate score for small objects | High |
 | C3 | **Clean, exhaustive evaluation** | If unlabelled objects are excluded from scoring, small-object errors are hard to interpret | High |
 | C4 | **Fits modest hardware** (download size, image count) | We have limited GPU and disk | Medium |
 | C5 | **Tooling and format** (COCO JSON, MMDetection support, evaluation code) | Less conversion work, comparable numbers | Medium |
@@ -58,9 +61,10 @@ five selection criteria in issue #1, plus C3.
 
 ## 2. Contenders
 
-Five datasets are commonly used as general-purpose detection benchmarks: COCO,
-LVIS, Objects365, Open Images and PASCAL VOC. I found no general-purpose
-benchmark built specifically for tiny objects (see the short answer above).
+We compared the five datasets most often used as general detection
+benchmarks: COCO, LVIS, Objects365, Open Images and PASCAL VOC. We didn't find
+a general-purpose benchmark made specifically for tiny objects (see the short
+answer above).
 
 ### 2.1 Nominee: MS COCO 2017
 
@@ -96,18 +100,19 @@ matches to within 0.2 points):
 | 32–64 px (medium) | 22.4% | | 96² px and up (large) | 23.9% |
 | over 64 px | 46.1% | | | |
 
-Median box size is 56 px. Our mask-area split (42 / 34 / 24%) matches COCO's
-published 41 / 34 / 24% [S2], which confirms the script. Mask area is smaller
-than box area, which is why the mask-based shares are higher than the box-based
-ones.
+The median box size is 56 px. Our split by mask area (42 / 34 / 24%) is the
+same as the 41 / 34 / 24% that COCO publishes [S2], so the script measures
+correctly. The shares by mask area are higher than by box size because a mask
+is always smaller than its box.
 
-**Strengths:** everything we compare against reports on it, CenterNet
-included. It has a dedicated small-object metric with an official definition,
-exhaustive labels and public val labels. Val 2017 alone is only 1 GB.
+**Strengths:** all the detectors we want to compare report results on COCO,
+including CenterNet. It has an official small-object metric, every object in
+every image is labelled, and the val labels are public. The val 2017 set is
+only 1 GB.
 
-**Weaknesses:** "small" means under 32×32 px, which is larger than the
-under-16 px "tiny" in the tiny-object literature, and only 12.6% of objects
-are under 16 px. Full training (118K images) is heavy for modest hardware.
+**Weaknesses:** COCO's "small" means under 32×32 px, which is bigger than the
+16 px that tiny-object papers use, and only 12.6% of its objects are under
+16 px. Training on the full set (118K images) is too much for our hardware.
 
 ### 2.2 Runner-up: LVIS v1.0
 
@@ -131,19 +136,21 @@ Re-annotation of the COCO 2017 images with a large, long-tailed vocabulary.
 | How often used | Not named in the surveys we read (their full dataset lists were not checked) | — |
 | Tooling | `lvis-api` (a COCO-API rewrite); MMDetection configs | [S7], [S10] |
 
-**Strengths:** the same images and size thresholds as COCO, but smaller
-objects. Switching from COCO costs only a 1.2 GB annotation download.
+**Strengths:** it uses the same images and size thresholds as COCO, but its
+objects are smaller. If we switched from COCO, we would only need to download
+1.2 GB of annotations.
 
-**Weaknesses:** the federated labels mean an unlabelled small object is not
-necessarily background, which makes small-object errors harder to interpret.
-The long tail mixes a second difficulty (rare classes) into every result.
-There are no CenterNet numbers to anchor to. **Its val set contains COCO train
-images**, so a COCO-pretrained model has already seen part of it. Evaluating
-COCO-pretrained weights on LVIS val would overstate performance.
+**Weaknesses:** not every object is labelled in every image (each category is
+only fully labelled on some images). So when a small object has no label, we
+can't tell if the detector made a mistake or the label is just missing. Many of
+its 1,203 categories are rare, which is a separate problem that would affect
+every result. There are no CenterNet results to compare with. Also, **its val
+set includes COCO train images**, so a model pretrained on COCO has already
+seen some of them, and its score on LVIS val would be too high.
 
-**Why it is the runner-up:** it is the only other contender that meets C2 and
-C5 fully, and it is the cheapest switch if COCO falls through. Its failure on
-C1 and C3 is why it is second, not first.
+**Why it is the runner-up:** apart from COCO, it is the only dataset that fully
+meets C2 and C5, and it is the easiest one to switch to if COCO doesn't work
+out. It is second and not first because it doesn't meet C1 and C3.
 
 ### 2.3 Other contenders
 
@@ -160,8 +167,9 @@ C1 and C3 is why it is second, not first.
 | C5 Format | COCO-style JSON; MMDetection configs | [S13], [S10] |
 | C6 Licence | Academic use only; annotations CC BY 4.0; images under Flickr terms; registration required | [S12] |
 
-**Why not chosen:** far too large for our hardware (C4), and few papers report
-results on it as a benchmark, CenterNet included (C1).
+**Why not chosen:** it is much too big for our hardware (C4), and few papers
+use it as a benchmark, so there are no results to compare with, including for
+CenterNet (C1).
 
 #### Open Images V7 (detection)
 
@@ -176,9 +184,9 @@ results on it as a benchmark, CenterNet included (C1).
 | C5 Format | CSV with normalised coordinates; its own AP@0.5 metric with class hierarchy | [S15], [S16] |
 | C6 Licence | Annotations CC BY 4.0; images listed as CC BY 2.0 | [S14] |
 
-**Why not chosen:** it has no small-object metric and its own scoring rules, so
-results are not comparable with most papers (C1, C2). Its labels are not
-exhaustive (C3), and it is too large (C4).
+**Why not chosen:** it has no small-object metric and uses its own scoring
+rules, so we couldn't compare our results with most papers (C1, C2). Not every
+object is labelled (C3), and it is too big (C4).
 
 #### PASCAL VOC 2007 + 2012
 
@@ -193,8 +201,9 @@ exhaustive (C3), and it is too large (C4).
 | C5 Format | XML; widely supported | [S19] |
 | C6 Licence | **TBD** (official site unreachable). Does not change the outcome: C2 rules it out regardless | — |
 
-**Why not chosen:** too few small objects and no small-object metric (C2), so
-it cannot measure the small-object gap, which is half of this dataset's job.
+**Why not chosen:** it has few small objects and no small-object metric (C2),
+so we couldn't use it to measure how detectors do on small objects, which is
+one of the main reasons we need a reference benchmark.
 
 ## 3. Comparison
 
@@ -211,50 +220,51 @@ it cannot measure the small-object gap, which is half of this dataset's job.
 
 ## 4. Decision
 
-**Nominee: MS COCO 2017**, with val 2017 (5K images, public labels) as our
-evaluation split and AP_S as the headline small-object metric.
+**Nominee: MS COCO 2017.** We evaluate on val 2017 (5K images, public labels)
+and use AP_S as the main small-object metric.
 
-Why it wins:
+Why we chose it:
 
-1. **It is the only contender that meets all three high-weight criteria.** It
-   has published results for every detector we might try, CenterNet included
-   (C1). It has a small-object metric with an official definition (C2). Its
-   labels are exhaustive (C3).
-2. **We can check our pipeline against the paper.** CenterNet's published val
-   2017 scores [S6] give us a target to reproduce before we trust any other
-   number.
-3. **The hardware concern is manageable.** We can evaluate pretrained models on
-   val 2017 (1 GB) without training. Where we do train, we can use a subset of
-   train 2017.
+1. **It is the only dataset that meets all three high-weight criteria.** There
+   are published results for every detector we might try, including CenterNet
+   (C1). It has an official small-object metric (C2). Every object is labelled
+   (C3).
+2. **We can check our setup against the paper.** CenterNet's published scores
+   on val 2017 [S6] give us numbers to reproduce before we trust any of our
+   other results.
+3. **It works with our hardware.** We can evaluate pretrained models on val
+   2017 (1 GB) without any training. When we do need to train, we can use part
+   of train 2017.
 
-**Runner-up: LVIS v1.0.** It is the only other contender with both a
-small-object metric and smaller objects than COCO (C2), on the same images and
-tooling (C5). It loses on C1 (no CenterNet numbers) and C3 (federated labels).
+**Runner-up: LVIS v1.0.** Apart from COCO, it is the only dataset with a
+small-object metric, and its objects are smaller than COCO's (C2). It also uses
+the same images and tools (C5). It came second because there are no CenterNet
+results for it (C1) and not every object is labelled (C3).
 
-Why not the others:
+Why we didn't choose the others:
 
 - **Objects365** is too large for our hardware (C4), and few papers report on it
   as a benchmark (C1).
 - **Open Images** has no small-object metric and its own scoring rules (C1, C2),
   non-exhaustive labels (C3), and is too large (C4).
-- **PASCAL VOC** is cheap and has CenterNet results, but too few small objects
-  and no small-object metric (C2).
+- **PASCAL VOC** is small and has CenterNet results, but it has few small
+  objects and no small-object metric (C2).
 
-Known limitation and how we handle it: COCO's "small" (under 32 px) is not
-"tiny" (under 16 px), and only 12.6% of COCO objects are under 16 px. The
-aerial and ground-level datasets cover truly tiny objects. On COCO we will also
-report AP in AI-TOD's finer size bins, which `pycocotools` supports through
-custom area ranges [S2]. At 12.6% of 36,335 val instances, that is about 4,600
-tiny objects, enough for a stable score.
+The main limitation is that COCO's "small" (under 32 px) is not the same as
+"tiny" (under 16 px), and only 12.6% of COCO objects are under 16 px. That's
+why we also have the aerial and ground-level datasets, which have many more
+tiny objects. On COCO we will also report AP for AI-TOD's smaller size ranges,
+which `pycocotools` can do with custom area ranges [S2]. That gives us about
+4,600 tiny objects in val 2017 (12.6% of 36,335).
 
-What would change the decision:
+We would change the decision if:
 - a specific benchmark is required for comparison with related work
 - a general-purpose tiny-object benchmark with published results turns up
 
 ## 5. Ruled out early
 
-These were looked at while searching for a general-purpose tiny-object
-benchmark, but were not shortlisted.
+We looked at these while searching for a general-purpose tiny-object
+benchmark, but didn't shortlist them.
 
 | Dataset | Domain | Link | Why dropped |
 |---|---|---|---|

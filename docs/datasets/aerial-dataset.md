@@ -37,7 +37,7 @@ selection criteria in issue #1. -->
 
 ## 2. Contenders
 
-<!-- Starting points: AI-TOD / AI-TOD-v2, VisDrone (the mentor's suggestion), DOTA, xView, SODA-A, the mentor's satellite-video dataset -->
+<!-- Starting points: AI-TOD / AI-TOD-v2, VisDrone, DOTA, xView, SODA-A, a satellite-video dataset -->
 
 ### 2.1 Nominee: <!-- dataset name -->
 

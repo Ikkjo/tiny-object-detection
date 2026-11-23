@@ -81,7 +81,7 @@ chosen; the models seen so far for it are in the
 | CenterNet Update (CenterNet with FPN) | PT | L53 | MMDetection 3.x; CenterNet2 (Detectron2) | 40.2 AP on COCO val (R-50); changes the loss (GIoU, more positives) and adds FPN levels |
 | TTFNet (training target only) | PT | L60 | Official repo (early MMDetection) | Not run as a detector; its target is a planned option for our CenterNet head |
 | Faster R-CNN | 2S | L04, L05, L49, L50 | MMDetection, Detectron2, torchvision | Host for NWD-RKA and RFLA. R-50-FPN on AI-TOD-v2: 12.8 AP, AP_vt 0.0 (L04, L05) |
-| Cascade R-CNN | 2S | L04, L51 | MMDetection | R-50-FPN on AI-TOD-v2: 15.1 AP, AP_vt 0.1 (L04, from a summary; the same numbers are in L12, Table 2) |
+| Cascade R-CNN | 2S | L04, L51 | MMDetection | R-50-FPN on AI-TOD-v2: 15.1 AP, AP_vt 0.1 (L04; also in L12, Table 2, and in the training log of mmdet-aitod's config) |
 | FCOS | AF | L04, L05, L59 | MMDetection; mmdet-rfla | R-50 on AI-TOD-v2: 13.4 AP, AP_vt 2.5; with RFLA 15.6 (L05 repo) |
 | NWD-RKA, RFLA (label assignment) | on 2S / AF | L04, L05 | mmdet-aitod, mmdet-rfla | Faster R-CNN R-50 on AI-TOD-v2: 21.4 AP (NWD-RKA), 22.6 AP (RFLA) |
 | DINO | DETR | L12, L61, L64 | MMDetection | 49.0 AP on COCO val (R-50, 12 epochs); 25.9 AP on AI-TOD-v2 (L12, re-implemented). DQ-DETR, built on it, 30.2 AP (L12) |

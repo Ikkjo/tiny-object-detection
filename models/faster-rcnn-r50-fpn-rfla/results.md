@@ -6,7 +6,7 @@ One row per run. Raw outputs go in `outputs/faster-rcnn-r50-fpn-rfla/<run name>/
 For each run, write down:
 - **Run:** a short name, also used as the folder name in `outputs/`
 - **Weights:** where the checkpoint came from (a download link, or the run that trained it)
-- **Setup:** anything that differs from the README (config changes, GPU, batch size, detections kept)
+- **Setup:** anything that differs from the README (PyTorch version, config or test options, GPU, detections kept)
 
 ## AI-TOD-v2 test
 

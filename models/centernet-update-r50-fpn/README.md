@@ -58,11 +58,15 @@ elsewhere and linking it:
 ln -s /path/to/tiny-object-detection/data/coco mmdetection/data/coco
 ```
 
-**AI-TOD-v2:** MMDetection 3.x has no AI-TOD-v2 config, and the AI-TOD
-evaluation code ([cocoapi-aitod](https://github.com/jwwangchn/cocoapi-aitod))
-is built for MMDetection 2.x. **TBD:** we need to write an AI-TOD-v2 dataset
-config for MMDetection 3.x and find out how to get the AI-TOD size bins
-(AP_vt, AP_t) in the evaluation.
+**AI-TOD-v2:** MMDetection 3.x has no AI-TOD-v2 config, and its COCO
+evaluation doesn't report the AI-TOD size bins (AP_vt, AP_t). **TBD**, shared
+with the other MMDetection 3.x models (see
+[CenterNet-HRNet-W18, step 4](../centernet-hrnet-w18/README.md#4-ai-tod-v2)):
+write an AI-TOD-v2 dataset config, save the predictions as COCO JSON and score
+them with [cocoapi-aitod](https://github.com/jwwangchn/cocoapi-aitod). The
+config keeps 100 detections per image (`model.test_cfg.max_per_img`); raise it
+to 1,500 for AI-TOD-v2, where a cap of 100 puts 26% of test objects out of
+reach ([`scripts/detection_cap_stats.py`](../../scripts/detection_cap_stats.py)).
 
 ## 3. Weights
 

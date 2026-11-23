@@ -6,7 +6,7 @@ One row per run. Raw outputs go in `outputs/centernet-hourglass104/<run name>/`
 For each run, write down:
 - **Run:** a short name, also used as the folder name in `outputs/`
 - **Weights:** where the checkpoint came from (a download link, or the run that trained it)
-- **Setup:** anything that differs from the README (config changes, GPU, batch size, detections kept)
+- **Setup:** anything that differs from the README (PyTorch version, config or test options, GPU, detections kept)
 
 ## COCO val 2017
 

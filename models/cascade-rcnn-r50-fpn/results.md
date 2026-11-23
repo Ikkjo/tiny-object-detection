@@ -21,6 +21,6 @@ COCO size bins use mask area (COCO's definition of "small" is under 32² px).
 AI-TOD size bins use box size √(w·h): very tiny 2–8 px, tiny 8–16 px, small
 16–32 px, medium 32–64 px.
 
-| Run | Weights | Setup | AP | AP50 | AP75 | AP_vt | AP_t | AP_s | AP_m | Notes |
-|---|---|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | | | |
+| Run | Weights | Setup | AP | AP50 | AP75 | AP_vt | AP_t | AP_s | AP_m | Expected | Notes |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| | | | | | | | | | | 15.1 AP, AP_vt 0.1 ([NWD-RKA paper](https://arxiv.org/abs/2206.13996)) | |

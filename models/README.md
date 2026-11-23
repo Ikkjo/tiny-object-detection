@@ -33,10 +33,10 @@ training run), so anyone can get the same file again.
 
 | Folder | Model | Role | Code |
 |---|---|---|---|
-| [`centernet-dla34`](centernet-dla34/) | CenterNet with DLA-34 | CenterNet nominee | Official CenterNet repo |
-| [`centernet-update-r50-fpn`](centernet-update-r50-fpn/) | CenterNet Update with ResNet-50 and FPN | CenterNet runner-up | MMDetection 3.x |
-| [`faster-rcnn-r50-fpn`](faster-rcnn-r50-fpn/) | Faster R-CNN with ResNet-50 and FPN | Two-stage nominee | MMDetection 3.x (COCO), mmdet-aitod (AI-TOD-v2) |
-| [`cascade-rcnn-r50-fpn`](cascade-rcnn-r50-fpn/) | Cascade R-CNN with ResNet-50 and FPN | Two-stage runner-up | MMDetection 3.x (COCO), mmdet-aitod (AI-TOD-v2) |
+| [`centernet-dla34`](centernet-dla34/) | CenterNet with DLA-34 | CenterNet nominee (Track B) | Official CenterNet repo |
+| [`centernet-update-r50-fpn`](centernet-update-r50-fpn/) | CenterNet Update with ResNet-50 and FPN | CenterNet runner-up (Track B) | MMDetection 3.x |
+| [`faster-rcnn-r50-fpn`](faster-rcnn-r50-fpn/) | Faster R-CNN with ResNet-50 and FPN | Two-stage nominee (Track B) | MMDetection 3.x (COCO), mmdet-aitod (AI-TOD-v2) |
+| [`cascade-rcnn-r50-fpn`](cascade-rcnn-r50-fpn/) | Cascade R-CNN with ResNet-50 and FPN | Two-stage runner-up (Track B) | MMDetection 3.x (COCO), mmdet-aitod (AI-TOD-v2) |
 | [`centernet-hrnet-w18`](centernet-hrnet-w18/) | CenterNet with HRNet-W18 | CenterNet backbone nominee (Track C) | MMDetection 3.x, our config |
 | [`centernet-swin-t`](centernet-swin-t/) | CenterNet with Swin-T | CenterNet backbone runner-up (Track C) | MMDetection 3.x, our config |
 | [`centernet-hourglass104`](centernet-hourglass104/) | CenterNet with Hourglass-104 | Reference, inference only (Track C) | Official CenterNet repo |

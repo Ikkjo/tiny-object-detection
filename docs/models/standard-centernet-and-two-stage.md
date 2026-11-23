@@ -33,7 +33,8 @@ We want two things from this track:
    improve for tiny objects.
 2. **Two-stage detectors as a baseline to compare with.** Most tiny-object
    papers build their methods on Faster R-CNN or Cascade R-CNN (NWD-RKA, RFLA,
-   SimD, CFINet, see the [paper log](../literature/paper-log.md)). So they give
+   SimD, CFINet, see the [paper log](../literature/paper-log.md) and its
+   [archive](../literature/paper-log-archive.md)). So they give
    us published results on AI-TOD-v2 to compare against, and a well-known point
    of comparison for CenterNet.
 

@@ -21,7 +21,7 @@ resolution. "Tiny" means under 16 px (the AI-TOD definition), and COCO's
 
 ## Short answer: which aerial datasets do tiny-object papers use, and how tiny are they?
 
-- **AI-TOD-v2 and VisDrone are used most.** Of the 27 aerial papers in [`paper-log.md`](../literature/paper-log.md), VisDrone
+- **AI-TOD-v2 and VisDrone are used most.** Of the 27 aerial papers we logged ([`paper-log.md`](../literature/paper-log.md) and its [archive](../literature/paper-log-archive.md)), VisDrone
   appears in 12, AI-TOD-v2 in 9, AI-TOD (v1) in 7, DOTA in 6 and SODA-A in 4
   *(est.)*.
 - **Only AI-TOD-v2 has tiny objects almost everywhere.** 85.9% of its objects
@@ -83,7 +83,7 @@ datasets and relabelled to fix missing annotations.
 | Licence and access | AI-TOD: CC BY-NC-SA 4.0, non-commercial. v2 licence not stated (**TBD**). Generating the images needs the xView train set (CC BY-NC-SA 4.0, registration) | [S3], [S19] |
 | Evaluation metric | COCO-style AP plus AP_vt / AP_t / AP_s / AP_m for the AI-TOD size bins, via `cocoapi-aitod` | [S4], [S3] |
 | Published baselines | DetectoRS + NWD-RKA 24.7 AP (strongest baseline in that paper: DotD 20.4); DQ-DETR 30.2 AP; YOLOv11-M 30.5 AP; ScaleBridge-Det (3 B parameters) 35.7 AP. No CenterNet result found; M-CenterNet scores 14.5 AP on AI-TOD v1 | [S4], [S37], [S36], [S34] |
-| How often used | 9 of 27 logged papers, nearly all from 2022 onward *(est.)* | [paper-log](../literature/paper-log.md) |
+| How often used | 9 of 27 logged papers, nearly all from 2022 onward *(est.)* | [paper-log](../literature/paper-log.md), [archive](../literature/paper-log-archive.md) |
 
 **Object sizes in detail** (measured, all splits; per-split values differ by
 under 1 point):
@@ -137,7 +137,7 @@ Drone images of streets and squares in 14 Chinese cities.
 | Licence and access | Direct download; licence not stated on the official page (**TBD**) | [S10] |
 | Evaluation metric | COCO-style AP at IoU 0.50:0.95, AP50, AP75, AR up to 500 detections | [S9] |
 | Published baselines | CornerNet (Hourglass-104) 23.43 AP on test-dev; CenterNet-based challenge entries RRNet 29.13 AP and MSC-CenterNet 31.13 AP; best 2020 entry 34.57 AP. DetectoRS 25.7 → 27.4 AP with NWD-RKA | [S9], [S4] |
-| How often used | 12 of 27 logged papers *(est.)* | [paper-log](../literature/paper-log.md) |
+| How often used | 12 of 27 logged papers *(est.)* | [paper-log](../literature/paper-log.md), [archive](../literature/paper-log-archive.md) |
 
 **Strengths:** it is the aerial dataset used most often, it can be downloaded
 directly, there are results for CenterNet-style detectors, and the images are
@@ -227,7 +227,7 @@ which is how most papers use them.
 | Domain, year, paper | Jilin-1 satellite video, 10 fps; TGRS 2021 ([arXiv 2111.12960](https://arxiv.org/abs/2111.12960)) | [S20] |
 | Images / classes | Paper: 47 videos, 1,646,038 instances. README: 40 videos, 853,911 boxes (the two disagree, **TBD**). Classes: plane, car, ship, train | [S20], [S21] |
 | C1 Tiny share | Small moving objects; measured share **TBD** | [S20] |
-| C2 Published results | Moving-object detectors such as DSFNet and HiEUM (CenterNet-derived) | [paper-log](../literature/paper-log.md) |
+| C2 Published results | Moving-object detectors such as DSFNet and HiEUM (CenterNet-derived) | [paper-log archive](../literature/paper-log-archive.md) |
 | C3 Annotation quality | Manual horizontal boxes | [S21] |
 | C4 Hardware | Frames of 12000×5000 px per the README (**TBD**) | [S21] |
 | C5 Format | **TBD** | — |
@@ -312,7 +312,7 @@ We would change the decision if:
 | AI-TOD (v1) | Aerial | [S2] | Same images as AI-TOD-v2 with missing labels that v2 fixes [S4] |
 | DOTA-v1.0 | Aerial | [S13] | Objects under 10 px were not annotated; v1.5 adds them on the same images |
 | SkyFusion | Mix of AI-TOD-v2 + Airbus Aircraft | [S32], [S33] | A 3,000-image subset of AI-TOD-v2 plus one extra source; one published study |
-| DIOR / DIOR-R | Aerial | [paper-log](../literature/paper-log.md) | Multi-scale rather than tiny; used in tiny-object papers only as a general benchmark |
+| DIOR / DIOR-R | Aerial | [paper-log archive](../literature/paper-log-archive.md) | Multi-scale rather than tiny; used in tiny-object papers only as a general benchmark |
 
 ### Not yet assessed
 
@@ -324,12 +324,13 @@ Found in the papers but not yet checked against the criteria:
 | RGBT-Tiny | Drone, RGB + thermal | 115 sequences, about 93K frames at 640×512, about 1.2 M boxes, 7 classes, over 81% under 16×16; access by request form | [S25], [S26], [S27] |
 | SAT-MTB | Satellite video | Horizontal-box subset: 144 videos, 33,228 frames, 308,204 instances | [S28], [S29], [S30] |
 | DTOD | **TBD** | 11,600 images (9,280 / 2,320), 1,019,800 instances, 88 objects per image on average; origin paper **TBD** | [S31] |
-| UAVDT | Drone video | Used by CEASC and YOLC; facts **TBD** | [paper-log](../literature/paper-log.md) |
+| UAVDT | Drone video | Used by CEASC and YOLC; facts **TBD** | [paper-log archive](../literature/paper-log-archive.md) |
 
 ### Papers found
 
 The papers behind this note, with the datasets and models each one uses, are
-in [`docs/literature/paper-log.md`](../literature/paper-log.md). The aerial
+in [`docs/literature/paper-log.md`](../literature/paper-log.md) and its
+[archive](../literature/paper-log-archive.md). The aerial
 papers and how they relate to the research directions are discussed in
 [`docs/literature/aerial-papers.md`](../literature/aerial-papers.md).
 

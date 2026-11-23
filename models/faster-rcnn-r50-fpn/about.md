@@ -38,7 +38,8 @@ How to run it: [README.md](README.md).
 ## Strengths and weaknesses
 
 **Strengths:** the model most tiny-object methods are built on (NWD-RKA,
-RFLA, SimD, CFINet, see the [paper log](../../docs/literature/paper-log.md)),
+RFLA, SimD, CFINet, see the [paper log](../../docs/literature/paper-log.md)
+and its [archive](../../docs/literature/paper-log-archive.md)),
 with published AI-TOD-v2 results both with and without those methods. Runs in
 every major framework with pretrained weights, and fits a modest GPU.
 

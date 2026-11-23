@@ -5,7 +5,9 @@ satellite images, and how each paper connects to the research directions in
 [CLAUDE.md](../../CLAUDE.md). This is part of issue #1. The facts about each
 dataset and our choice of dataset are in
 [`aerial-dataset.md`](../datasets/aerial-dataset.md), and the datasets and
-models each paper uses are listed in [`paper-log.md`](paper-log.md).
+models each paper uses are listed in [`paper-log.md`](paper-log.md) (papers
+tied to our chosen datasets and models) and
+[`paper-log-archive.md`](paper-log-archive.md) (the rest).
 
 Every number has a source, listed in [section 6](#6-sources). **TBD** means
 we haven't checked it against a primary source yet, and *(est.)* means we

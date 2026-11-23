@@ -133,6 +133,12 @@ AI-TOD "tiny" is under 16×16 px. Always state which definition a number uses.
   - the paper log, `docs/literature/paper-log.md`: every paper we read, with
     the datasets and models it uses (input for issues #1 and #2)
   - final decisions in `docs/datasets/selection.md` and `docs/model-selection.md`
+- **Models** we benchmark each get a folder in `models/` (see
+  `models/README.md`): `README.md` says how to run the model, `about.md` has
+  its details with sources, and `results.md` has our results. Every command in
+  a model's `README.md` comes from that model's own docs, with a link, and
+  untried steps are marked. Weights go in `checkpoints/<model folder>/` and
+  raw outputs in `outputs/<model folder>/`, never in `models/`.
 - **Scripts** (data analysis, evaluation helpers) go in `scripts/`, each with a
   docstring saying what it does and how to run it. Any number in the notes that
   we computed ourselves should come from a script in the repo, so it can be

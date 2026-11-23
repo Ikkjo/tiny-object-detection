@@ -15,7 +15,9 @@ also what Claude uses as its instructions in this repo.
 | `CLAUDE.md` | Shared project context and working rules |
 | `docs/datasets/` | Dataset research: one file per dataset choice, plus the final decision in `selection.md` |
 | `docs/literature/` | Paper notes and the paper log (datasets and models used by each paper) |
+| `docs/models/` | Model research: which models we compare and why |
 | `docs/` | Other research notes and decisions (e.g. `model-selection.md`) |
+| `models/` | One folder per chosen model: how to run it (`README.md`), details (`about.md`) and our results (`results.md`) |
 | `scripts/` | Analysis and helper scripts |
 | `data/`, `checkpoints/`, `outputs/` | Datasets, model weights and experiment outputs. **Not tracked by git** |
 

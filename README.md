@@ -47,3 +47,11 @@ formats (COCO JSON, VisDrone, DOTA, xView, SODA-A):
 ```bash
 python3 scripts/aerial_size_stats.py --format coco --name "AI-TOD-v2 val" data/ai-tod-v2/aitodv2_val.json
 ```
+
+`scripts/detection_cap_stats.py` counts how many objects a detector can't
+find because it keeps too few detections per image (for caps of 100, 128,
+300, 900 and 1,500):
+
+```bash
+python3 scripts/detection_cap_stats.py data/ai-tod-v2/aitodv2_test.json
+```

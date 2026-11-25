@@ -33,7 +33,8 @@ We want two things from this track:
    improve for tiny objects.
 2. **Two-stage detectors as a baseline to compare with.** Most tiny-object
    papers build their methods on Faster R-CNN or Cascade R-CNN (NWD-RKA, RFLA,
-   SimD, CFINet, see the [paper log](../literature/paper-log.md)). So they give
+   SimD, CFINet, see the [paper log](../literature/paper-log.md) and its
+   [archive](../literature/paper-log-archive.md)). So they give
    us published results on AI-TOD-v2 to compare against, and a well-known point
    of comparison for CenterNet.
 
@@ -170,7 +171,7 @@ and how to run it is in [its README](../../models/cascade-rcnn-r50-fpn/README.md
 In short:
 
 - COCO val 2017: 40.3 AP (MMDetection); paper AP_S 22.6 *(check)* [M11], [M12]
-- AI-TOD-v2: 15.1 AP, AP_vt 0.1 *(check)* [M13]
+- AI-TOD-v2: 15.1 AP, AP_vt 0.1 [M13], [M15]
 - same FPN levels as Faster R-CNN [M12]
 - 4.4 GB training memory [M11]
 - effort is **low**: same setup as Faster R-CNN [M11], [M15]
@@ -179,7 +180,7 @@ In short:
 extra memory (4.4 vs 4.0 GB).
 
 **Weaknesses:** the extra stages help with box accuracy but not with finding
-very tiny objects (AP_vt 0.1). It is slower, and some of its numbers still need
+very tiny objects (AP_vt 0.1). It is slower, and its COCO AP_S still needs
 checking against the paper.
 
 **Why it is the runner-up:** it is the next model up from Faster R-CNN, with
@@ -206,7 +207,7 @@ methods if we end up with a bigger GPU.
 
 | Property | Value | Source |
 |---|---|---|
-| C1 Results | AI-TOD-v2: 14.5 AP, AP_vt 0.1 *(from a summary of the paper's table; check)* | [M13] |
+| C1 Results | AI-TOD-v2: 14.5 AP, AP_vt 0.1 | [M13], [M15] |
 
 **Why not here:** a high-resolution backbone, which is Track C's topic.
 
@@ -216,7 +217,7 @@ methods if we end up with a bigger GPU.
 
 | Criterion | **CenterNet DLA-34** (nominee) | **CenterNet Update R50-FPN** (runner-up) | CenterNet R-101 | **Faster R-CNN R50-FPN** (nominee) | **Cascade R-CNN R50-FPN** (runner-up) | DetectoRS |
 |---|---|---|---|---|---|---|
-| C1 Published small-object results | ⚠️ COCO AP_S 19.9; no AI-TOD-v2 | ❌ No AP_S found | ❌ No AP_S | ✅ COCO AP_S; AI-TOD-v2 | ✅ COCO AP_S; AI-TOD-v2 *(check)* | ✅ AI-TOD-v2, best host |
+| C1 Published small-object results | ⚠️ COCO AP_S 19.9; no AI-TOD-v2 | ❌ No AP_S found | ❌ No AP_S | ✅ COCO AP_S; AI-TOD-v2 | ✅ COCO AP_S *(check)*; AI-TOD-v2 | ✅ AI-TOD-v2, best host |
 | C2 Code that runs today | ❌ PyTorch 0.4.1 + DCNv2 (official) | ✅ MMDetection 3.x | ❌ Same as DLA-34 | ✅ Everywhere | ✅ MMDetection | ✅ MMDetection |
 | C3 Fits modest hardware | ❓ Memory TBD | ✅ 3.3 GB | ❓ TBD | ✅ 4.0 GB | ✅ 4.4 GB | ❌ 9.9 GB |
 | C4 Output stride | ✅ 4 | ⚠️ FPN, finest 8 | ✅ 4 | ✅ FPN from stride 4 | ✅ FPN from stride 4 | ✅ FPN |
@@ -271,8 +272,12 @@ We would change the decision if:
   find a working DCNv2 build. This decides between the nominee and the
   runner-up.
 - [ ] Find CenterNet DLA-34's training memory and full parameter count.
-- [ ] Check the Cascade R-CNN and HRNet rows of the AI-TOD-v2 table in the
-  NWD-RKA paper PDF (we only have them from a summary).
+- [ ] Raise the object and detection limits in the official CenterNet code
+  before training on AI-TOD-v2 (see
+  [its README](../../models/centernet-dla34/README.md#2-data)).
+- [x] Check the Cascade R-CNN and HRNet rows of the AI-TOD-v2 table in the
+  NWD-RKA paper. Both match the training logs at the top of mmdet-aitod's
+  baseline configs [M15].
 - [ ] Check Cascade R-CNN's COCO AP_S in its paper (Table 6).
 - [ ] Fix the mmdet-aitod Faster R-CNN baseline config, which loads the
   AI-TOD v1 dataset file (see
@@ -295,6 +300,6 @@ We would change the decision if:
 - [M12] Cai & Vasconcelos, *Cascade R-CNN* — <https://arxiv.org/abs/1712.00726>
 - [M13] Xu et al., *Detecting tiny objects in aerial images: A normalized Wasserstein distance and a new benchmark* (NWD-RKA, AI-TOD-v2) — <https://arxiv.org/abs/2206.13996>
 - [M14] RFLA code and results — <https://github.com/Chasel-Tsui/mmdet-rfla>
-- [M15] AI-TOD code (mmdet-aitod) — <https://github.com/Chasel-Tsui/mmdet-aitod>
+- [M15] AI-TOD code (mmdet-aitod); its Cascade R-CNN and Faster R-CNN HRNet-w32 baseline configs start with the log of the training run behind the published numbers — <https://github.com/Chasel-Tsui/mmdet-aitod>, <https://github.com/Chasel-Tsui/mmdet-aitod/blob/main/mmdet-nwdrka/configs_nwdrka/baseline/aitodv2_cascade_rcnn_r50_baseline_1x.py>, <https://github.com/Chasel-Tsui/mmdet-aitod/blob/main/mmdet-nwdrka/configs_nwdrka/baseline/aitodv2_faster_hrnet_w32_baseline_1x.py>
 - [M16] MMDetection DetectoRS configs and results — <https://github.com/open-mmlab/mmdetection/tree/main/configs/detectors>
 - [M17] Our paper log — [docs/literature/paper-log.md](../literature/paper-log.md)

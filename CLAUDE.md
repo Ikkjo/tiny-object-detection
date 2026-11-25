@@ -130,8 +130,9 @@ AI-TOD "tiny" is under 16×16 px. Always state which definition a number uses.
   - research notes, one file per topic, named after what they cover rather than
     after a person or track, e.g.
     `docs/datasets/reference-benchmark.md`
-  - the paper log, `docs/literature/paper-log.md`: every paper we read, with
-    the datasets and models it uses (input for issues #1 and #2)
+  - the paper log, `docs/literature/paper-log.md`: the papers tied to the
+    datasets and models we chose, with the datasets and models each uses.
+    Every other paper we read goes in `docs/literature/paper-log-archive.md`
   - final decisions in `docs/datasets/selection.md` and `docs/model-selection.md`
 - **Models** we benchmark each get a folder in `models/` (see
   `models/README.md`): `README.md` says how to run the model, `about.md` has

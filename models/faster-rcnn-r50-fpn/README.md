@@ -140,6 +140,9 @@ python tools/test.py <config> <checkpoint> --eval bbox
 
 The published result to compare with is **12.8 AP, AP_vt 0.0, AP_t 9.2**
 ([RFLA README](https://github.com/Chasel-Tsui/mmdet-rfla#main-results), Table 2).
-**TBD:** check that the output shows AP_vt and AP_t. mmdet-aitod imports
-`pycocotools`, so we need to confirm the AI-TOD version of the COCO API is the
-one being used.
+The output includes AP_vt and AP_t: mmdet-aitod's AI-TOD-v2 dataset class
+scores with the AI-TOD version of the COCO API and counts up to 1,500
+detections per image
+([`mmdet/datasets/aitodv2.py`](https://github.com/Chasel-Tsui/mmdet-aitod/blob/main/mmdet-nwdrka/mmdet/datasets/aitodv2.py)).
+The configs keep up to 3,000 detections per image, so nothing is cut before
+scoring.

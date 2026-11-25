@@ -69,7 +69,7 @@ python tools/train.py configs_nwdrka/baseline/aitodv2_cascade_rcnn_r50_baseline_
 python tools/test.py configs_nwdrka/baseline/aitodv2_cascade_rcnn_r50_baseline_1x.py <checkpoint> --eval bbox
 ```
 
-The published result to compare with is 15.1 AP, AP_vt 0.1, AP_t 11.5. We
-only have these numbers from a summary of the
-[NWD-RKA paper](https://arxiv.org/abs/2206.13996), so they still need
-checking against its table.
+The published result to compare with is **15.1 AP, AP_vt 0.1, AP_t 11.5**
+([NWD-RKA paper](https://arxiv.org/abs/2206.13996)). The log of that run is at
+the top of the config file, including per-class AP, so we can compare more
+than the headline number.

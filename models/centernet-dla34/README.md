@@ -88,7 +88,21 @@ ln -s /path/to/tiny-object-detection/data/coco $CenterNet_ROOT/data/coco
 
 **AI-TOD-v2:** CenterNet has no AI-TOD-v2 config. **TBD:** we need to add
 AI-TOD-v2 as a new dataset in the code (it is in COCO format, so this should
-follow the COCO dataset class).
+follow the COCO dataset class). Three limits in the code need raising for it,
+because AI-TOD-v2 images can have up to 2,667 objects:
+
+- `max_objs = 128` in the COCO dataset class
+  ([coco.py](https://github.com/xingyizhou/CenterNet/blob/master/src/lib/datasets/dataset/coco.py)):
+  only the first 128 objects of an image are used for training, which leaves
+  out 20% of AI-TOD-v2 trainval objects
+- the `--K` test option, default 100
+  ([opts.py](https://github.com/xingyizhou/CenterNet/blob/master/src/lib/opts.py))
+- `self.max_per_image = 100` in
+  [base_detector.py](https://github.com/xingyizhou/CenterNet/blob/master/src/lib/detectors/base_detector.py)
+
+With 100 detections per image, 26% of AI-TOD-v2 test objects are out of reach
+([`scripts/detection_cap_stats.py`](../../scripts/detection_cap_stats.py)), so
+we raise both test limits to 1,500, the most the AI-TOD evaluation counts.
 
 ## 3. Weights
 

@@ -27,7 +27,7 @@ How to run it: [README.md](README.md).
 |---|---|---|
 | COCO val 2017 | 40.3 AP (MMDetection) | [MMDetection configs page](https://github.com/open-mmlab/mmdetection/tree/main/configs/cascade_rcnn) |
 | COCO test-dev | 40.6 AP, AP_S 22.6 (paper, ResNet-50) *(from a summary of the paper; check Table 6)* | [paper](https://arxiv.org/abs/1712.00726) |
-| AI-TOD-v2 test | 15.1 AP, AP_vt 0.1, AP_t 11.5 *(from a summary of the paper's table; check)* | [NWD-RKA paper](https://arxiv.org/abs/2206.13996) |
+| AI-TOD-v2 test | 15.1 AP, AP50 34.2, AP_vt 0.1, AP_t 11.5, AP_s 26.7, AP_m 38.5 | [NWD-RKA paper](https://arxiv.org/abs/2206.13996); training log at the top of the [mmdet-aitod config](https://github.com/Chasel-Tsui/mmdet-aitod/blob/main/mmdet-nwdrka/configs_nwdrka/baseline/aitodv2_cascade_rcnn_r50_baseline_1x.py) |
 | AI-TOD-v2 test, with NWD-RKA | 22.2 AP, AP_vt 7.8 *(from a summary of the paper's table; check)* | [NWD-RKA paper](https://arxiv.org/abs/2206.13996) |
 
 ## Strengths and weaknesses
@@ -36,5 +36,5 @@ How to run it: [README.md](README.md).
 extra memory (4.4 vs 4.0 GB).
 
 **Weaknesses:** the extra stages help with box accuracy but not with finding
-very tiny objects (AP_vt 0.1). It is slower, and some of its numbers still
-need checking against the paper.
+very tiny objects (AP_vt 0.1). It is slower, and its COCO AP_S and its
+NWD-RKA result still need checking against the papers.

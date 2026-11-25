@@ -48,7 +48,7 @@ Multi-class driving benchmark for small object detection, built from Mapillary V
 | Licence and access | CC BY-NC 4.0, free for academic research, commercial use prohibited. Direct OneDrive download, no registration form | [S3] |
 | Evaluation metric | `SODADeval` reports AP at IoU 0.50:0.95, AP50, and AP75 on the SODA Small band (area <= 1024 px^2), plus AP_eS, AP_rS, AP_gS, and AP_N. See [SODA-D evaluation](#soda-d-evaluation) | [S2], [S4] |
 | Published baselines (CenterNet?) | Yes, Table 6 on test set, all R-50 except CornerNet Hourglass-104 and YOLOX CSP-Darknet: **CenterNet 21.5 AP** (AP50 48.8, AP75 15.6, **AP_eS 5.1**, AP_rS 16.2, AP_gS 29.6, AP_N 42.4), **CornerNet 24.6 AP** (AP_eS 6.5), Faster R-CNN 28.9, Cascade R-CNN 31.2, RetinaNet 28.2, FCOS 23.9, RepPoints 28.0, ATSS 26.8, YOLOX 26.7, Sparse R-CNN 24.2, Deformable-DETR 19.2, RFLA 29.7 [S2]. CFINet ICCV 2023 reaches 30.7 AP and 14.7 AP_eS [S5] | [S2], [S5] |
-| How often used in the papers found | Three papers in this branch's log report SODA-D experiments (SODA, CFINet, DyFrDet). ReDHF also reports SODA-D results, with its log entry in PR #8 | [paper log](../literature/paper-log.md), [S20] |
+| How often used in the papers found | Four logged papers report SODA-D experiments (SODA, CFINet, DyFrDet and ReDHF) | [paper log](../literature/paper-log.md), [archive](../literature/paper-log-archive.md), [S20] |
 
 Across the three splits, the measured share under 32 px ranges from 71.1% to 71.7%, a gap under 0.7 percentage points. The table combines all 278,433 foreground boxes. [S1]
 
@@ -88,7 +88,7 @@ Dedicated tiny-person benchmark built from web videos of coastal, beach, and mar
 | Licence and access | Public download links through Google Drive and Baidu Pan. Dataset licence **TBD**. The repository's MIT licence covers the code | [S7] |
 | Evaluation metric | AP and log-average miss rate (MR), primarily at overlap 0.50, with 0.25 and 0.75 also reported. The evaluator uses IoU for regular boxes and intersection over detection area (IOD) for ignore regions, including uncertain boxes. Size bands in px include `tiny1 [2, 8]`, `tiny2 [8, 12]`, `tiny3 [12, 20]`, `tiny [2, 20]`, and `small [20, 32]` | [S6], [S8] |
 | Published baselines (CenterNet?) | Tiny AP50 in the TinyPerson paper, Table 6. FCOS 16.90, RetinaNet 30.82, DSFD 31.15, Adaptive RetinaNet 41.25, Adaptive FreeAnchor 41.36, and Faster R-CNN FPN 43.55. Table 7 gives 47.29 for Faster R-CNN FPN with Monotone Scale Match. SSPNet Table I gives 59.13 with Faster R-CNN and 58.59 with Cascade R-CNN. RFLA Table 6 gives 26.5 with FCOS and 50.1 with Faster R-CNN. We found no plain CenterNet baseline in the papers checked | [S6], [S9], [S21] |
-| How often used in the papers found | TinyPerson experiments appear in four logged papers (Scale Match, RFLA, SSPNet, and Point Teacher). The SODA survey and the survey by Kos and Belter also discuss the dataset | [paper log](../literature/paper-log.md), [S2], [S6], [S9], [S21], [S22], [S25] |
+| How often used in the papers found | TinyPerson experiments appear in four logged papers (Scale Match, RFLA, SSPNet, and Point Teacher). The SODA survey and the survey by Kos and Belter also discuss the dataset | [paper log](../literature/paper-log.md), [archive](../literature/paper-log-archive.md), [S2], [S6], [S9], [S21], [S22], [S25] |
 
 The standard detection split has 1,532 images. Mean and median box sizes are 18.2 px and 12.3 px with uncertain boxes included, and 20.1 px and 13.8 px with them excluded. TinyPerson Table 1 reports a mean of 18.0 px and a standard deviation of 17.4 px. [S1], [S6]
 
@@ -184,7 +184,7 @@ We propose training and testing on 800x800 SODA-D inputs at stride 650, pending 
 
 ### Papers found, by domain
 
-See the [paper log](../literature/paper-log.md) for the checked comparisons. ReDHF's entry is in [PR #8](https://github.com/Ikkjo/tiny-object-detection/pull/8).
+See the [paper log](../literature/paper-log.md) and its [archive](../literature/paper-log-archive.md) for the checked comparisons.
 
 | Domain | Paper | Venue | Datasets used |
 |---|---|---|---|

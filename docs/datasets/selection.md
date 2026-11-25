@@ -5,10 +5,7 @@ This is the final choice of the three datasets we use in the project (issue
 each one we pick a nominee and a runner-up. The research for each choice is in
 its own notes file, linked below.
 
-**Status:** in progress. We have nominees for the reference benchmark and the
-aerial dataset, and the ground-level dataset is still being researched. We fill in the
-rest of this file once all three are nominated and everyone working on the
-issue agrees.
+All three datasets have nominees and runners-up. Team agreement on the choices and evaluation setup is pending.
 
 ## Decision
 
@@ -16,7 +13,7 @@ issue agrees.
 |---|---|---|---|
 | Reference benchmark | MS COCO 2017 *(nominated)* | LVIS v1.0 | [reference-benchmark.md](reference-benchmark.md) |
 | Aerial images | AI-TOD-v2 *(nominated)* | VisDrone2019-DET | [aerial-dataset.md](aerial-dataset.md) |
-| Ground-level images | *pending* | *pending* | [ground-level-dataset.md](ground-level-dataset.md) |
+| Ground-level images | SODA-D *(nominated)* | TinyPerson | [ground-level-dataset.md](ground-level-dataset.md) |
 
 ## Why each was chosen
 
@@ -55,29 +52,27 @@ The full comparison is in the notes file.
   copy on Kaggle. 88% of the objects are vehicles, and there are no published
   CenterNet results, so we produce the first CenterNet baseline ourselves.
 
-### Ground-level images: *pending*
+### Ground-level images: SODA-D
 
-<!-- Nominee, why, runner-up, limitation. Summary of ground-level-dataset.md section 4. -->
+SODA-D tests tiny objects across nine street and driving classes. In the native annotations, 21.0% of foreground boxes are under 16 px and 71.4% are under 32 px. The SODA paper reports CenterNet at 21.5 AP and 5.1 AP_eS and CornerNet at 24.6 AP. Native images average 3407x2470 px and the image archive is 24.92 GiB. We propose 800x800 patch inputs pending team agreement and a hardware check. [SODA-D research notes](ground-level-dataset.md#21-nominee-soda-d)
+
+TinyPerson is the runner-up. Among its normal detection boxes, 58.0% are under 16 px. It evaluates one person class in coastal scenes and reports AP and log-average miss rate using IoU for normal boxes and intersection over detection area (IOD) for ignore regions. The image archive sizes and dataset licence are **TBD**. [TinyPerson research notes](ground-level-dataset.md#22-runner-up-tinyperson)
 
 ## How the three fit together
 
-<!-- Fill in once all three are chosen. Check that together they cover:
-- at least one dataset where a large share of objects is under 16 px
-- the same metrics everywhere where possible (AP, AP_S, and AI-TOD size bins),
-  so results can be compared across datasets
-- what fits our hardware: which splits we evaluate on, and whether we train on
-  full sets or subsets -->
+The nominees form a progression in native box size. The share under 16 px rises from 12.6% on COCO to 21.0% on SODA-D and 85.9% on AI-TOD-v2. At native resolution and stride 4, 12.9% of SODA-D boxes and 67% of AI-TOD-v2 boxes produce a radius-0 CenterNet Gaussian that covers just the centre cell. [COCO notes](reference-benchmark.md), [SODA-D notes](ground-level-dataset.md), [AI-TOD-v2 notes](aerial-dataset.md)
+
+All three have COCO-style box labels and public evaluation annotations. Each benchmark uses its own AP protocol. In particular, SODA-D reports headline AP over its Small band, with box area up to and including 1024 px^2. [SODA-D evaluation](ground-level-dataset.md#soda-d-evaluation)
 
 ## Evaluation setup
-
-This is how we will use each dataset. We need to agree on it before running
-any baselines.
 
 | Dataset | Evaluation split | Training data | Metrics |
 |---|---|---|---|
 | MS COCO 2017 | val 2017 (5K images, public labels) | Pretrained weights; subsets of train 2017 where we train | AP, AP50, AP75, AP_S/M/L, plus AP in AI-TOD size bins |
 | AI-TOD-v2 | test (14,018 images, public labels) | trainval (14,018 images), or a subset of it if our hardware needs that | AP, AP50, AP75, plus AP_vt / AP_t / AP_s / AP_m for AI-TOD's size ranges (`cocoapi-aitod`) |
-| Ground-level | *pending* | *pending* | *pending* |
+| SODA-D | Full test, 7,428 images and 88,082 foreground boxes. Merge patch predictions in original image coordinates | Train, 12,383 images and 134,301 foreground boxes, or a fixed subset if needed. Proposed input for both splits is 800x800 patches at stride 650. The paper resizes to 1200x1200 | `SODADeval` on category IDs 1 through 9, with AP at 100 detections per class per image. Report AP, AP50, and AP75 on SODA Small, and AP_eS, AP_rS, AP_gS, and AP_N |
+
+For supplemental AI-TOD size-bin scores on SODA-D, adapt a copy of the foreground annotations for `cocoapi-aitod` and use the same merged predictions. The [SODA-D evaluation protocol](ground-level-dataset.md#soda-d-evaluation) gives the annotation fields, detection cap, and NMS settings.
 
 ## Agreement
 
